@@ -1,0 +1,588 @@
+---
+title: 'Codemeta: a Rosetta Stone for Metadata in Scientific Software'
+author:
+- Carl Boettiger (UCB)
+- Matthew B. Jones (UCSB/NCEAS)
+output:
+  pdf_document:
+    fig_caption: yes
+    keep_tex: yes
+  html_document: default
+bibliography: references.bib
+fontsize: 11
+---
+
+Vision and Rationale
+--------------------
+
+<!--
+- software is important
+- infrastructure to archive/index/share/discover/attribute software is important (Is there a better way to say that?)
+-->
+
+Software developed by scientific researchers plays an already ubiquitous
+and  ever increasing role in academic research, leading to increasing
+recognition of the need for better mechanisms to _archive_, _index_,
+_share_, _discover_ and _attribute_ research software. These needs impact
+users, creators, and funders of this software. Researchers relying on
+software need better mechanisms to discover and cite software they use.
+Researchers creating software need a robust way to archive software
+and track metrics of use. Funders supporting software creation are also
+interested in ways to identify preserve, track, and measure the use of
+software they have supported.  [@Hannay2009] find that 91.2% of
+researchers state that using scientific software is important or very
+important for their own research and 84.3% say developing software is
+an important part of their own research. 54% spend more time developing
+software now than in the decade prior, and 38% spend at least one fifth
+of their time developing software.
+
+<!-- Software is rarely archived, indexed or cited consistent with best practices -->
+
+Despite this, software created by scientific researchers is rarely
+archived, indexed or cited properly and consistent with best practices.
+For instance, @Howison2015 find that citation practices
+are "diverse and problematic." Their study finds that only 31%-43% of
+the mentions of software in papers include a formal citation.
+Formal citations are important not only because they provide more complete
+information (the authors find most informal mentions acknowledge authors)
+but also because tools used to compute citation metrics which play an
+essential role in assessment of scholarly work typically apply only to
+citations in a bibliography or references section of a paper.  The same
+study reveals problems with access to the software that citations are
+supposed to facilitate, with between 15%-29% of software mentioned being
+inaccessible in any form.  Software may be inaccessible because the
+citation does not provide enough information to identify it, because
+the software is no longer available at the URL provided (preservation failure),
+or because the software has never been made publicly available.
+Moreover, the specific version of the software can be identified and
+accessed in fewer than 10% of cases.  All of these issues arise not only
+from behavior of authors using the software, but reflect issues in the
+way in which software is archived and distributed.
+
+<!-- Should we have more of a vision paragraph describing what would be possible? 
+     (Makes the intro even longer; perhaps better left to proposal part...) -->
+
+### Software Metadata Tower of Babble
+
+
+<!-- Heterogeneity of practices contributes to this substantially. --> 
+
+<!--
+- Software is not archived with metadata appropriate for a citation.  (compare DOI)
+- The software itself is frequently not archived
+- Software indices use diverse formats  (authors, descriptions)
+- Software languages use diverse formats (versions, dependencies, etc.) 
+-->
+
+Heterogeneity of practices in software archives contributes to
+these issues in citing and accessing software.  In contrast to the
+established practices of journal publication 
+<!-- (which replaced far less effective practices of letters and anagrams 350 years ago) --> 
+or the more nascent practices for data publication, the mechanisms to
+archive, index, share, discover, and attribute research software remain
+highly heterogeneous. Like journals and data repositories, indexes or
+repositories for software can be specific to domains (e.g. Astrophysics
+Source Code Library, ASCL), funder (DARPA Open Catalog) or conversely
+rely on platforms also used for commercial software (GitHub, as used by
+code.nasa.gov).  Yet while journals and data repositories adopt consistent
+metadata that is aggregated and indexed (e.g. by CrossRef and DataCite,
+as well as publishers like Thompson Reuters that compute impact factors
+<!-- MBJ: I think this is arguable. Lots of heterogeneity in metadata for data too. -->
+<!-- CB: True. What I'm trying to say is that a lot more of scientific data achiving has gotten behind the
+idea of DataCite than software has-->
+from citation information), no such infrastructure exists for software.
+Indexes like the ASCL or DARPA Open Catalog do not necessarily archive
+the software itself, making citations vulnerable to the inaccessibility
+<!-- MBJ: nor do platform software repos. CRAN is not an archive -->
+<!-- CB: Agree; should we mention them too?-->
+found by @Howison2015. These indexes may not always specify
+the specific version of the software, or, lacking an automated way to
+track updates to software that is maintained at an external location, may
+not reflect the most recent versions.  Software repositories frequently
+omit other information necessary for reuse of the software, such as a
+description of the software dependencies, computational environments,
+or tests to ensure that the software is preforming properly.
+
+Journal articles and data repositories handle heterogeneity of metadata
+across their diverse repositories by mapping to common schema such as
+the CrossRef and DataCite standards, or domain-specific metadata standards
+such as ISO-19115.  This approach avoids many of the
+above-mentioned problems afflicting software citation. Academic journals
+and data repositories alike have settled on a widely recognized system
+of Digital Object Identifiers (DOIs).  DOIs provide a way to avoid
+link rot since the identifier can always be redirected to a new URL.
+Journals or repositories that fail to do this can lose their license
+to issue DOIs.  To receive a DOI that can be assigned to an article
+or dataset, journals or repositories must provide the DOI registration
+service (CrossRef for journals, DataCite for repositories) with minimal
+metadata required for a citation.  Because this metadata is provided in
+a standardized and searchable form, third party tools such as popular
+reference management software (e.g. Endnote, Mendeley, Papers, Bibsonomy)
+can automatically import the appropriate citation metadata given a DOI.
+All of this substantially facilitates the process of providing complete
+citations that can consistently access the resource cited. This kind
+of interoperability is not possible in software archives which all use
+different schema with no mapping among them.  While DataCite DOIs can
+be issued to software archives by approved repositories, this system
+is neither widely applied nor contains specific metadata required for
+citations to software (such as version, licenses, or dependencies).
+
+Even where DOIs have been assigned to software, the heterogeneity in
+metadata practices frustrates their effectiveness.  The data repositories
+figshare and Zenodo have recently worked in a project with the Mozilla
+Science Lab and the software repository GitHub to create prototype
+web-based tools that can automatically archive source code from GitHub
+into Zenodo or figshare.  This creates an archival copy of the source
+code, should the GitHub version ever be lost, and provides the code
+with a registered DOI (as discussed in the NIH report on a software index
+[http://softwarediscoveryindex.org/report](http://softwarediscoveryindex.org/report)).
+Such automated tools sidestep the problem observed by @Allen2015 wherein
+the expectation that a researcher will upload the software itself and not
+just a description of the software is one that is often onerous enough to
+dissuade researchers from archiving at all.  However, due to differences
+in the schema used by each stakeholder, this process can be rather
+incomplete and error prone.  For instance, while the GitHub metadata
+can identify an overall project and all released versions associated
+with that project in chronological order, Zenodo and figshare provide
+no such way to represent the relationship between these versions, which
+appear as completely separate entities, if they appear at all. This makes
+it much more difficult to perform tasks like aggregating the number of
+citations a software product has received across all versions. Incomplete
+or inaccurate mappings also result in incorrect software licenses
+being listed (e.g. in the figshare archive) or incorrect authors being
+assigned. To address these issues, these repositories need both a robust
+consensus on how terms should be mapped between the different schema,
+and what holes exist in the current schema that prevent certain concepts
+from being described at all.
+
+<!-- Information required differs by use case -->
+
+These differences and gaps in schema arise because different metadata
+is required for different purposes. Thus this heterogeneity is not simply
+a technical issue, but a cultural one which requires an understanding of 
+each of the use cases that motivate the various metadata schema.  
+At the most basic level, @Howison2015 observe that informal
+mentions of software use only the name of the software, failing to
+acknowledge the individuals who created it.  Identifying information
+required by formal citations is only one use case for a software index.
+We list other applications of software metadata in Table 1.
+Some software indices such as the ASCL, code.nasa.gov or DARPA Open
+Catalog provide additional fields useful for users searching for software
+that fills a particular role by associating category or keyword terms with
+each entry.  Meanwhile, a user actually seeking to install the software
+needs to know what dependencies it has on other software, including
+their versions.  A user seeking to modify or extend the software needs
+access to the source code, as well as knowledge of what software license
+governs its reuse.  As different users and different repositories have 
+(often only implicitly) different use cases is mind, opinions differ as to
+what metadata should be minimally sufficient for describing research software.
+
+
+| Example uses for software metadata
+| ----------------------------------
+| Generate formal citations to software
+| Download the software and documentation
+| Determine what the software is supposed to do
+| Determine software version to ensure reproducible results
+| Discover newer or older versions of software for comparison
+| Determine software license to assess reuse restrictions
+| Determine the software dependencies / environment required
+| Identify mechanisms to assess software quality
+| Identify relevant software by keywords, subject categories, creator or other fields
+| Identify citations and other metrics of software reuse
+
+Table 1: Uses for software metadata
+
+<!--
+@ChueHong2014 identifies five different categories for software metadata
+
+1. License: Determines the terms of reuse
+2. Availability: Information related to the discovery and accessibility of the software
+3. Quality: information describing what the software is supposed to do.  This may also include how to assess that it does what it is supposed to (e.g. unit tests)
+4. Support: information describing how to install the software, dependencies, where to report bugs
+5. Incentive: information on how to acknowledge the software, such as acknowledging developers, contributors, and providing a DOI
+
+-->
+
+<!-- The need for crosswalk between existing terms -->
+
+Even when software repositories overlap in use cases, they represent the
+same information using different formats and different vocabularies
+(schema).  For instance, in different schema individuals may be
+recognized as "author", or "creator", as well as more specific terms
+such as "maintainer" or "contributor."  Automated tools require unambiguous
+mappings between different versions of the same concept. 
+Figure 1 illustrates 3 different metadata standards (R DESCRIPTION file,
+Zenodo metadata, and DataCite metadata) that are used to describe the same
+software product.  Differences in format and terms used in each creates
+metadata loss as information is changed from one format to another.
+Together, this heterogeneity in objectives and practices makes for a Tower of Babble of
+software metadata.  This frustrates the development of user friendly tools
+to aid in archiving and citing software, fragments community efforts, and
+ultimately discourages researchers from investing greater effort to archive
+or cite academic software. 
+
+<!-- MBJ: This figure is not legible at normal print sizes -->
+![Panels representing different representations of software metadata.](figures/pipeline.png)
+
+
+## Proposal Objectives 
+
+This proposal seeks to address these problems by bringing together
+a collaboration of stakeholders in the software archive pipeline 
+to harmonize their disparate approaches to software metadata. Work
+will proceed in three phases. Phase 1 will build a crosswalk table among 
+existing software metadata schemas.  In Phase 2, stakeholders will implement
+changes to their existing software schemas and develop applications that take
+advantage of the crosswalk table. In Phase 3, we will conduct a second workshop 
+with domain scientists to assess outcomes and summarize
+these outcomes in a scientific paper. Project milestones and deliverables
+are summarized in Table 2 and described more fully below.
+
+Milestone     | Description                       | Project phase
+------------- | --------------------------------- |----------------
+D1            | Draft crosswalk table             | Q1
+D2            | Draft JSON-LD schema              | Q1
+D3            | Workshop on Crosswalk table       | Q2
+D4            | Crosswalk table (mtg consensus)   | Q2
+D5            | Crosswalk schema (mtg consensus)  | Q2
+D6            | Amending DataONE metadata         | Q1 -- Q3
+D7            | R software metadata package       | Q2 -- Q3
+D8            | Collaborating stakeholders report | Q2 -- Q3
+D9            | Software citation tracking        | Q3 -- Q4
+D10           | GitHub repo & milestones          | Q1 -- Q4
+D11           | Journal article on outcomes       | Q4
+D12           | Assessment workshop               | Q4
+
+Table 2: Milestones and Deliverables
+
+### Phase 1: Crosswalk Table
+
+<!-- D1: draft table and use cases -->
+Many metadata standards for software and other scholarly outputs already
+exist. Examples include the Software Ontology [@malone_software_2014], 
+the R Description file [@wickham_r_2015], and the DataCite Kernel Metadata
+specification [@starr_iscitedby_2011], as well as more ad-hoc approaches such as the GitHub,
+Zenodo, and Figshare metadata sets. Rather than define new standards, this group would define a
+mapping between those standards already in place.  We will
+bring together representatives from key software archiving infrastructure
+(figshare, GitHub, DataONE, Zenodo, DataCite, EarthCube, the Software
+Ontology, and other members from scientific communities of practice)
+to design and implement a robust crosswalk of metadata
+schema used by these communities.  A preliminary version can be found at
+[github.com/mbjones/codemeta/blob/master/crosswalk.csv](https://github.com/mbjones/codemeta/blob/master/crosswalk.csv)
+
+This mapping takes the form of a crosswalk table, where columns represent
+schema in place by different repositories (GitHub, Zenodo, figshare
+etc) and rows represent terms in the schema.  For instance, Zenodo
+uses the term "creators" where figshare uses the term "authors." In
+some cases this mapping will not be as trivial, for instance when it is
+many-to-one (e.g. a schema that differentiates between "date published,"
+"date created," or "date modified," vs simply having "date")
+or when the analogous field is missing or not obvious (e.g. "code
+repository" or "other versions", and "Funder ID" are not defined in
+many schema). Consequently this mapping will ultimately rely on input
+from the repositories to reach a community consensus on the
+appropriate mappings.
+
+The issue of gaps in the crosswalk table -- terms defined in one
+schema with no obvious counterpart in another schema -- raises a more
+challenging problem.  Different schema have been created to facilitate
+different uses, and determining exactly what terms must be included
+is a more difficult challenge, similar to the well-recognized problem
+of creating new standards.  To avoid this issue and facilitate dialog,
+this group will instead focus on identifying and enumerating the _use
+cases_ associated with different sets of metadata.  For instance, the
+use case of "scientific citation" requires metadata fields which are
+common to most schema: such as _creator_, _date_, _title_ and so forth,
+while the use case of installing the software requires different fields
+such as "software dependencies" that are far less common and less well
+standardized. Associating metadata fields with use cases will help guide
+the process of identifying what gaps in schema should be addressed and
+what gaps merely reflect different use case objectives of different
+schema. 
+
+<!-- D2: Schema  -->
+Once the crosswalk table has been defined conceptually, it is necessary to
+have a machine-readable representation of this information which will enable
+tool development, which we will refer to as a "schema" for the crosswalk
+table. This schema must be rich enough to capture the diverse terms of different
+stakeholders, including the potential for formal semantic representations (e.g., the Software Ontology [@malone_software_2014])
+while also being in a format that is easily integrated into existing tools.
+A JSON-LD format is probably most suitable for this role, as discussed in
+more detail here:
+[http://www.arfon.org/json-ld-for-software-discovery-reuse-and-credit](http://www.arfon.org/json-ld-for-software-discovery-reuse-and-credit)
+
+<!-- D3: meeting -->
+To catalyze this process, we will organize a three-day meeting in
+Spring of 2016 in Berkeley, CA to bring together 10-15 stakeholders
+and agree upon the crosswalk table terms and categories (Deliverable
+D3, in Table 2). The supporting material includes letters of collaboration
+from already-committed stakeholders to attend the meeting. We will present participants with a draft version of
+the crosswalk table (D1) that we develop in the months prior to the
+meeting to help focus discussion on concrete outcomes. Likewse, we will
+present stakeholders with a draft of the machine-readable format (schema) for
+representing this crosswalk table (D2). Both this crosswalk table and 
+the machine-readable schema represention will be refined at the meeting into 
+products that represent the needs and consensus of these stakeholders
+(D4, D5). 
+
+The consensus crosswalk table will be published on GitHub where participants and other
+stakeholders can critique, revise, and propose further extensions with
+other schema. Once in place, the crosswalk table could be extended to include terms
+from other repositories.  In particular, this could include repositories
+developed for specific computer languages such as the `DESCRIPTION` files
+associated with R packages on the Central R Archive Network (CRAN), which
+include many of the same fields. 
+
+**Deliverables**: D1: Draft software metadata use cases and 
+crosswalk table; D2: Draft JSON-LD schema expressing consensus software metadata concepts and crosswalk (codemeta.json); D3: Software metadata crosswalk workshop; D4: Consensus crosswalk table; D5: Consensus 
+JSON-LD schema for software metadata.
+
+### Phase 2: Implementation by Repositories
+
+Each of the repositories participating in this proposal would then be
+able to extend their existing schema accordingly to ensure they have
+implemented the metadata necessary for the use cases they intend to
+support. It is in this phase that stakeholders may add or modify fields
+associated with gaps in their schema that need to be addressed to fulfill
+a given use case. Several key
+stakeholders have already committed to participating in the meeting and
+implementing any necessary changes in their schema that arise as a result,
+including: the software repository GitHub and the data repositories
+Zenodo, figshare, and the KNB.  By modifying their existing schema to
+bridge gaps in the crosswalk table, these stakeholders will enable a
+much more robust system for software archiving and interchange than is
+currently available.
+
+<!--CB: Not sure if this section belongs here? Maybe some of this belongs in the DataONE section above-->
+Provenance and computational replicability represent some of the
+more advanced but critically important use cases for archiving and
+describing software.  Current data repository efforts such as DataONE and
+Dryad support archiving specific versions of data and associating them
+with published manuscripts, but the infrastructure for doing the same
+with software is in its infancy.  Archiving code intended for reuse is
+very different from archiving most of the code that scientists write to
+calculate results in papers, which are typically one-off scripts and codes
+targeting a specific science problem.  GitHub, CRAN, PyPI, and similar
+repositories focus on sharing re-usable code, but not so much one-off
+code.  The R CRAN maintainers would outright reject the vast majority
+of scientific code written, as it would be deemed unsuitable for reuse.
+However, it reflects reality as we know it, and it would be useful
+for people trying to understand a paper, regardless of its condition.
+Data repositories like the KNB are starting to offer code archiving and
+snapshotting.  Research software intended for reuse by other researchers
+in the context of other scientific questions presents a different problem
+than such one-off scripts, as it typically continues to evolve after it is
+first released, and the archived version quickly becomes stale. Automatic
+integration between GitHub and the data repositories could remedy this
+issue by continuing to import future versions of the software on the data
+repository whenever a new release is created on the GitHub repository,
+without requiring any human intervention.  This trigger system is already
+implemented in the link between GitHub and Zenodo, but is less effective
+than it might be as Zenodo does not currently track the relationships
+between these versions. 
+
+<!-- DataONE implementation -->
+The NSF-sponsored DataONE federation of repositories, including the KNB Data Repository, 
+provide archival services for both data and software, but with relatively minimal metadata for software.
+During this phase, we will focus on adjusting the software metadata used in the DataONE
+network to reflect the consensus crosswalk table (D6), and enable its use to describe
+all scientific software, including both one-off and software built for reuse.
+This would provide all data repositories in the DataONE network with a standard
+format in which to capture software metadata that would interoperate with other community
+repositories such as FigShare and Zenodo. To facilitate the use of this metadata
+format, we would extend the `dataone` R package to allow users to automatically
+upload software and appropriate metadata to the KNB, a member data repository 
+in the DataONE network (D7). The DataONE network is already working towards
+collecting and saving provenance information regarding scientific processes, and
+a robust software metadata model will strengthen this work. This application would 
+serve as a prototype to both illustrate and test how robust software archiving can 
+be facilitated by such tools.
+<!-- MBJ: This seems adequate to me.  I could give some examples, but that would
+     just take space, and it seems we are already significantly over length.  Let's discuss. -->
+
+<!-- Unfunded stakeholders implementation -->
+GitHub, Zenodo, and figshare intend to revisit their current
+implementations of the tools that allow a user to import software from
+GitHub into one of the data repositories and assign it a DOI.  By making
+use of the crosswalk table, this import process can avoid losing or
+inconsistently mapping metadata fields.  In certain places this may also
+involve adjusting existing schema used by the stakeholders to avoid gaps
+where metadata required by a desired use case is currently being lost.
+While this work will be taken on by individual stakeholders and not
+directly supported through this proposal funding, we will summarize
+what changes result from these activities (D8).
+
+#### Tools to identify and aggregate citations to software
+
+We will also develop a prototype tool to provide an aggregated view of software usage and citation, 
+building upon the existing work done for data citation by the recent 
+NSF-EAGER-supported project "Making Data Count,"
+[http://escholarship.org/uc/item/9kf081vf](http://escholarship.org/uc/item/9kf081vf).
+
+Measuring the impact of research software through citations is essential
+to both crediting and incentivizing software sharing and archiving,
+just as it is for data and journal publications.  However, accurately
+counting citations to software is particularly problematic due to the
+heterogeneous and problematic citation practices observed in @Howison2015.
+Complete and consistent metadata is essential for
+aggregating heterogeneous citation practices into proper citation counts.
+For instance, some formal citations cite only a journal article that
+describes the software, while others cite the software itself. Still
+more cite the software only by name. Metadata that associate the software
+name, related versions, and related publications to a unique identifier
+for a given piece of software is thus necessary to tabulate citations.
+To illustrate the value of the crosswalk table and implementations
+described above to addressing the problem of software citation, we
+will extend data usage and citation metrics to the software world by
+building on the "Making Data Count" project,
+[http://escholarship.org/uc/item/9kf081vf](http://escholarship.org/uc/item/9kf081vf).
+This work would involve configuring Lagotto's indexing engine to detect software
+as well as data and articles as it scans through existing corpora of work, and
+then indexing those software usage events as it does for data and articles (D9).
+
+**Deliverables** D6: Implementation of crosswalk metadata in DataONE. D7: Implementation
+of an R-based software package that would assist researchers in uploading software or
+code scripts to the KNB data repository. D8: A description of the implementations and 
+adjustments made by participating stakeholders to their existing infrastructure. 
+D9: Software usage and citation metrics tracking extending Lagotto.
+
+
+### Phase 3: Assessment and Communication
+
+Project assessment and communication will be carried out through three
+main mechanisms. First, we will maintain a public list of project
+milestones through the project GitHub repository's milestone tracker system (D10).
+This will allow participants and other members of the community to view 
+progress and comment on issues related to any one of the milestones summarized
+in Table 2. This list shall be maintained throughout the project duration.  
+It will also provide a mechanism for open community participation in the project.
+
+Second, we will conduct a formal usability evaluation workshop with domain 
+scientists (D11). We will invite usability study experts from the DataONE
+Usability and Assessment working group to help design and run this workshop, as
+it closely aligns with the DataONE provenance tracking initiatives.
+The assessment will focus on conceptual understanding of domain
+researchers needs for software metadta. We will
+gather feedback on the utility of our overall approach to software citation 
+and software discovery in research, as well as the specific use cases and metadata 
+content identified in Phase I. We will also have researchers evaluate the prototype
+software upload tools from Phase II. This will help us assess how these prototypes are likely
+to impact individual researchers and how they discover, use, archive, and cite 
+software.  Due to the short 1 year timeline of the project, this workshop will focus on
+usability of the crosswalk table and prototype tools created during the EAGER, rather than
+usage and uptake which would not be appropriate to measure over such a short timeline. 
+This workshop would be held in a 1/2 day
+session at the annual meeting of the Ecological Society of America in August of 2016, to 
+help ensure participation of domain researchers who use or create software
+in the course of their research.
+
+Finally, all project outcomes, including the results of this assessment,
+will be reported in a scientific publication at the end of the project period (D12).
+This would help communicate the consensus reached by stakeholders in 
+creating the crosswalk table, as well as highlighting the outcomes from the various
+applications implemented in Phase 2 and the experience of the assessment workshop.
+
+<!-- Mention WSSSPE? -->
+
+## Project Management Plan
+
+This project will be led by PI Boettiger at UC Berkeley. Collaborators are uniquely suited
+to realize this project due to their involvement in key community software and data
+archival initiatives, including Co-PI Jones at UC Santa Barbara (DataONE), Arfon Smith (GitHub), 
+Lars Holm Nielsen (Zenodo), Mark Hahnel (Figshare), and Martin Fenner (PLOS). These 
+individuals will act as the project leadership team to guide all development work 
+to completion of stated milestones. The project will be  implemented in three phases over 1 year 
+starting in October, 2015 as outlined in Table 2 and the main body above, with 
+the intent that each phase builds upon the previous.
+
+Project tasks will be recorded in a GitHub issue tracking repository and used to
+record all activities of project participants, as well as coordinate with the 
+broader community.  All project software and artifacts will also be made available
+through GitHub or another open repository under an OSI-approved open source license
+such as the `Apache 2` license.  See the Data Management plans for further details.
+
+## Broader Impacts
+
+<!-- not sure what format this should take. Probably scrap the bullets points -->
+
+- Other software indexes or repositories could adopt and extend the
+crosswalk table
+- Promote the development of an ecosystem of tools for working with
+software metadata
+- Funders could more easily track software they support
+- Researchers could more easily archive software completely and
+accurately.
+- Citations to software archived in this way would be more useful
+
+The crosswalk table would provide a valuable resource for other software
+repositories and indices even if they are not directly involved in its
+creation.  By mapping their own schema to any one of the repositories
+represented in the crosswalk table they would immediately have a
+mapping to all others.  Likewise, this would help make such repositories
+interoperable with any applications built around the crosswalk table.
+Additional mappings could be proposed as Pull Requests to the crosswalk
+table.
+
+In addition to the example applications proposed as part of this
+proposal, the existence of the crosswalk table would facilitate the
+development of further applications that require such metadata.
+For instance, tools to compute "Transitive Credit" [Katz & Smith
+2014](http://arxiv.org/abs/1407.5117) could be built around the citation
+or software dependencies lists of different software as expressed in
+the crosswalk table.  A machine readable and software-language-agnostic
+representation of dependencies provided by this metadata could be used
+to write a script that automatically provisions a virtual machine
+or container with the dependencies required for the software to execute.
+For a language-specific proof-of-concept, see https://github.com/richfitz/dockertest 
+
+
+Including identifiers for the funder and possibly grant supporting the
+software would enable programmatic identification of any software products
+associated with a particular funder, as well as tracking future versions,
+citations, or other metrics of use of that software.
+
+Researchers generating software would benefit from the more streamlined
+and accurate metadata made possible by the crosswalk table and tools such
+as the automated detection of software metadata for specific languages
+and the improved pipeline for assigning DOIs to software on GitHub
+through integration with data repositories.
+
+Researchers could cite such software using it's DOI.  Many popular
+authoring platforms can automatically fill in citation information given
+a DOI (EndNote, Papers, Mendeley, Bibsonomy), making citation easier
+and more accurate.  Readers looking up a citation would have access to
+the source code and richer description of the software, potentially
+including information about dependencies and related works such as
+published articles describing the software. Consistent citing patterns
+through the use of a DOI would also facilitate tabulating citations.
+
+## Results of Prior Research
+__Matthew Jones__. NSF 0830944 and 1430508: *DataONE: Observation Network for Earth*. __Amount__: $20M Phase I, $15M Phase II __Period__: 8/1/2009–9/30/2019. __Summary__: DataONE collaborated with 30+ organizations to develop cyberinfrastructure for the environmental sciences, federating currently 28 Member repositories and providing interoperable search, discovery, and access to earth and environmental data. __Products__: DataONE tools spanning the data lifecycle, such as data management planning tools, metadata creation tools, data integration, storage and access platforms, and analysis and modeling tools. __Publications__: Over 26, including [@reichman_challenges_2011], [@michener_dataone_2011], [@missier_linking_2010], [@hampton_big_2013]. __Broader Impacts__: DataONE impacts workforce development through training workshops, development of educational materials, and community needs assessments. __Intellectual Merit__: DataONE has developed a robust, distributed cyberinfrastructure that has enabled a national and international data federation of unprecedented scope.  Currently 28 global member nodes distribute over 100,000 distinct data products to the international science community.
+
+__Carl Boettiger.__ NSF DBI-1306697: _Management for an uncertain 
+world: robust decision theory in face of regime shifts_.
+__Amount__: 138K. __Period__:
+7/1/2013-6/30/2015. __Summary__: NSF Biology Postdoctoral position
+(Intersections of Biology and Mathematical and Physical Sciences and
+Engineering); co-mentored by Marc Mangel (UCSC) and Stephan Munch
+(NWFSC). __Intellectual Merit__: Project developed a novel approach to
+ecological management under uncertainty, adapting decision-theoretic
+approaches to deal with model uncertainty and the possibility of regime
+shifts through a non-parametric Bayesian approach.  __Publications:__
+(3): @nonparametricbayes, @docker, @RNeXML. __Other Products__: RNeXML
+R package (http://http://cran.r-project.org/web/packages/RNeXML),
+the Rocker project (https://github.com/rocker-org/rocker) & an Open
+Lab Notebook (http://carlboettiger.info).  __Broader Impacts__: served
+as rOpenSci Leadership Team board member (http://ropensci.org), NCEAS
+Science Adviser (http://nceas.ucsb.edu) and Software Carpentry Instructor
+(http://software-carpentry.org); also received training as a post-doctoral
+fellow, including participation in conferences, working groups, and a
+successful faculty job application to UC Berkeley.
+
+\pagebreak
+
+References
+----------
+
