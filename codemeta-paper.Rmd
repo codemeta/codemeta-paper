@@ -1,0 +1,47 @@
+---
+title: 'CodeMeta: a Rosetta Stone for Metadata in Scientific Software'
+author:
+- Alice Allen (ASCL)
+- Carl Boettiger (UC Berkeley)
+- Abigail Cabunoc Mayes (Mozilla Science Lab)
+- Neil P. Chue Hong (SSI)
+- Luke Coy (RIT & Mozilla Science Lab)
+- Mercè Crosas (Harvard IQSS)
+- Patricia Cruse (DataCite)
+- Carole Goble (University of Manchester)
+- Matthew B. Jones (UCSB/NCEAS)
+- Daniel S. Katz (NCSA)
+- Kyle E. Niemeyer (Oregon State University)
+- Krzysztof Nowak (Zenodo)
+- Ashley Sands (UCLA)
+- Peter Slaughter (NCEAS)
+- Arfon Smith (GitHub, Inc.)
+output:
+  pdf_document:
+    fig_caption: yes
+    keep_tex: yes
+  html_document: default
+bibliography: references.bib
+fontsize: 11
+---
+
+```{r child = 'introduction.Rmd'}
+```
+
+```{r child = 'methodology.Rmd'}
+```
+
+```{r child = 'use-cases.Rmd'}
+```
+
+```{r child = 'concepts.Rmd'}
+```
+
+```{r child = 'examples.Rmd'}
+```
+
+```{r child = 'next-steps.Rmd'}
+```
+
+References
+----------
