@@ -1,0 +1,21 @@
+Concepts
+--------
+
+Cluster/categorize concepts:
+
+ * Core (fundamental identity metadata about the software): SoftwareTitle, SoftwareIdentifier, IdentiferNamespace
+ * Author/contributor information (metadata about entities that have contributed to the software): SoftwareAuthor, AuthorName, AuthorId, AuthorEmail, AuthorAffiliation, SoftwareContributor, UploadedBy
+ * Descriptors/classifiers (metadata used to support discovery): ControlledTerm, Tags, Description, Inputs, Outputs, Function, ProgrammingLanguage, OperatingSystem, L10n, IntendedAudience
+ * Locators (metadata used to support accessibility): RelatedLink, CodeRepositoryLink, ReadmeLink, BuildLink, CILink, IssueLink, ZippedCodeLink
+ * Rights/permissions (metadata used to identify restrictions): AccessList, License, EmbargoDate
+ * Record data (metadata describing the evolution of the software and how it is identified): datePublished, dateCreated, dateModified, Version, SoftwareCitation
+ * Metadata data (metadata about the metadata record itself): GeneratedBy, (do we also need others for recordDatePublished, recordDateModified for the record?),
+ * Relationships (metadata about connections to other software, artefacts, and entities): RelatedPublications, SoftwarePaperCitation, Funding, Dependency, Suggests
+ * Quality (metadata relating to software quality metrics): TestCoverage, DocsCoverage, DevelopmentStatus
+ * Marked for removal: ObjectType, Relationship, IsAutomated, Package, InteractionMethod, DownloadCount, CitationCount,
+ * Removed: notes, topic_id, bibcode, alias, described_in, used_in, see_also, century, time_updated, time_added, dynamic_config, meta_spec, directories.doc, no_index, provides, Problems, DownloadLink, SystemRequirements, ViewsCount, UserInterace
+ * ?: Publisher
+
+Define concepts.
+
+Map concepts to use cases.

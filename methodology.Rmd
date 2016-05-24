@@ -1,0 +1,15 @@
+Methodology
+-----------
+
+CodeMeta seeks to address these problems by bringing together a collaboration of stakeholders in the software archive pipeline to harmonize their disparate approaches to software metadata. The participating stakeholders include representatives from dedicated software archives (e.g., ASCL), general purpose repositories (e.g., Zenodo, GitHub, figshare), domain and institutional data repositories (e.g., DataONE, DataVerse), open science communities (e.g., Software Sustainability Institute, Mozilla Science Lab), tool developers, and domain researchers.
+
+The guiding principles of the CodeMeta activity are that it should be driven by real world use cases, lead to results that are as simple as possible, and be conscious of how it will impact existing practices and repositories.
+
+CodeMeta’s overarching goal is to produce a crosswalk among software metadata approaches that enables software metadata creators and repositories to communicate effectively about software using a consensus vocabulary.  In this paper, we describe the results of that interoperability activity, specifically the work done by about 15 attendees in a two-day workshop in April 2016 in Portland, Oregon, co-located with the FORCE2016 conference.  This was an equal group effort by the participants, who all contributed to the workshop and to the writing.
+
+Future work will provide reference implementations within several of our stakeholder community repositories and applications.
+
+Overview of paper structure:
+
+ * Stakeholder audience(s)
+ * 

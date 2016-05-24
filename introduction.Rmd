@@ -1,0 +1,75 @@
+Introduction
+------------
+
+Software developed by scientific researchers plays an already ubiquitous and
+ever increasing role in academic research, both as a supporting element of
+research recorded as papers, as well as a primary research output.
+This leads to increasing recognition of the need for better mechanisms to
+_archive_, _index_, _share_, _discover_ and _attribute_ research software.
+These needs impact users, creators, {repositories}, and funders of this software.
+Researchers relying on software need better mechanisms to discover and cite
+software they use. Researchers creating software need a robust way to archive
+software and track metrics of use. Funders supporting software creation are also
+interested in ways to identify preserve, track, and measure the use of software
+they have supported. [@Hannay2009] find that 91.2% of researchers state that
+using scientific software is important or very important for their own research
+and 84.3% say developing software is an important part of their own research.
+54% spend more time developing software now than in the decade prior, and 38%
+spend at least one fifth of their time developing software.
+
+Despite this, software created by scientific researchers is rarely archived,
+indexed, or cited properly and consistently with best practices, which are
+needed for both appropriate credit for software work and reproducibility of
+work that uses software. For instance, @Howison2015 find that citation practices
+are "diverse and problematic." Their study finds that only 31--43% of the
+mentions of software in papers include a formal citation.  Formal citations
+are important not only because they provide more complete information (the
+authors find most informal mentions acknowledge authors) but also because
+tools used to compute citation metrics which play an essential role in
+assessment of scholarly work typically apply only to citations in a
+bibliography or references section of a paper.  The same study reveals
+problems with access to the software that citations are supposed to facilitate,
+with between 15--29% of software mentioned being inaccessible in any form.
+Software may be inaccessible because the citation does not provide enough
+information to identify it, because the software is no longer available at the
+URL provided (preservation failure), or because the software has never been
+made publicly available.
+
+Need for discoverability and reuse
+
+In many research fields, code and development practices are of widely varying quality, due to lack of recognized best practices and lack of rewards and incentives.  Standardizing repositories and practices around the FAIR concepts will contribute to solving this problem.
+
+What do we mean by software in this context?
+
+ * It covers a wide range of code products: from a piece of code that contains a function to a multi function tool
+
+ * Research software can be distinguished from other software in that is is similar to other research product such as papers or books. The specific decision of what is research software is up to each person to decide. However, an illustrative example is the use of Microsoft Excel in research. We suggest that if Excel is used to simply store and plot data, it is not research software, but if it is used for statistical analysis, it may be. Similarly, general software for conducting library research (e.g., JSTOR Mobile App), writing research papers (e.g., LaTeX), research presentations (e.g., Powerpoint) or communications (e.g., Skype) are not research software. On the other hand, if the specific software is important to the research outcome,  for example if different software could produce different data or results, then the software is research software.
+
+Generally recognized that it should be in the landscape:
+
+ * Link to SCWG principles [@SCWG; @SoftwareCitation2016]
+ * Link to other calls for software as first class object (NSF “Products” vs Pubs)
+ * Reports that call for software discovery and preservation (NIH Software Discovery Index)
+
+Why software is different than other research outputs, such as data and papers:
+
+ * Conceptual differences: granularity/referencing, versioning, evolving contributor set
+ * Software can be considered a type of data, but the converse is not generally true. Software is different than data and papers in that:
+
+   * Software can be used to express or explain concepts, unlike data
+   * Software is updated more frequently that papers or data.
+   * Software is executable, unlike papers or data
+   * Software suffers from a different type of bit rot than data — software must be constantly maintained so that it continues to function as both the hardware and software environments that it is used on changes, as bugs are found and fixed, and as user requirements demand new features and capabilities.
+   * Software is frequently built to use other software, leading to complex dependencies, and these dependent software packages also are frequently changing.
+   * Software is generally smaller than data, so a number of the storage and preservation constraints on data don’t apply to software.
+   * Software teams can be very large, and very multidisciplinary, and there can be many varied roles that are overlapping and sometimes ambiguous with respect to contributions, and which contributions rise to a level equivalent to paper authorship.
+   * The lifetime of software is generally not as long as that of data.
+   * (cite https://danielskatzblog.wordpress.com/2016/04/13/data-and-software-management-plans-must-be-public-and-should-be-machine-readable/)
+
+### Heterogeneity in software metadata
+
+In contrast to the established practices of journal publication or the more nascent practices for data publication, the mechanisms to archive, index, share, discover, and attribute research software remain highly heterogeneous. Like journals and data repositories, indexes or repositories for software can be specific to domains (e.g. Astrophysics Source Code Library, ASCL), funder (DARPA Open Catalog) or conversely rely on platforms also used for commercial software (GitHub, as used by code.nasa.gov).  Yet while journals and data repositories adopt consistent metadata that is aggregated and indexed (e.g. by CrossRef and DataCite, as well as publishers like Thomson Reuters that compute impact factors from citation information), no such infrastructure exists for software.  Indexes like the ASCL or DARPA Open Catalog do not necessarily archive the software itself, making citations vulnerable to the inaccessibility found by @Howison2015. These indexes may not always specify the particular version of the software, or, lacking an automated way to track updates to software that is maintained at an external location, may not reflect the most recent versions.  Software repositories frequently omit other information necessary for reuse of the software, such as a description of the software dependencies, computational environments, or testing and quality information to ensure that the software is suitable for particular uses.
+
+These differences and gaps in schema arise because different metadata are required for different purposes. Thus this heterogeneity is not simply a technical issue, but a cultural one which requires an understanding of each of the use cases that motivate the various metadata schema.
+
+CodeMeta is intended to provide software metadata {framework, schema, crosswalk} for making software Findable, Accessible, Interoperable, and Reusable (FAIR); specific use cases (below), targeting interoperability. CodeMeta is not intended to be yet another standard, but rather a crosswalk that allows interoperability among existing practitioners and repositories that want to exchange software metadata.

@@ -1,0 +1,63 @@
+Examples
+--------
+
+### Citation
+
+Journals, SCWG linkage (example of principles in action)
+
+### GitHub, Zenodo, figshare, DataCite integration
+
+Motivation: A researcher wishes to discover:
+
+ * Image processing packages, written in Python and with an MIT license.
+ * Packages with authors who have a particular affiliation.
+ * Packages that leverage a particular dependency.
+
+Currently there isn’t a standard way for software authors to describe their software in a way such that the metadata is persisted through to services such as DataCite. NOW THERE IS... <!--⚡ 🚀 💥-->
+
+The author searches DataCite for suitable matches.  
+
+https://search.datacite.org/ui?q=pyabel
+
+With codemeta authors can describe their code in software-specific terms enhancing discovery on DataCite
+
+Concepts           | Github  | Zenodo             | DataCite          | CodeMeta
+------------------ | ------- |------------------- | ----------------- | --------
+License            | license | license            | Rights            | license
+Title              | -       | title              | Title             | title
+Dependency         | -       | -                  | -                 | dependency
+CodeRepositoryLink | self    | related_identifier | RelatedIdentifier | SoftwareRepository
+
+Table 2: Example crosswalk table.
+
+The following
+
+ * Current implementation
+    * Title: Repo name, (release name OR tag)
+    * Related_identifiers (github repo, is supplement to)
+    * No dependency, programming language, operating system
+    * License lost/overridden
+    * Infer contributors vs specify from setup.py, other (raw github contributors)
+ * Codemeta Implementation:
+    * Developer tools to infer & declare richer metadata (TheScript.rb), (R)
+    * Zenodo mapping from code.jsonld to zenodo schema
+    * Expanded/extended description of contributing authors
+    * Discovery of software via metadata DataCite - scenario-based explanation of how metadata is persisted from GitHub via Zenodo all way to DataCite.
+
+https://www.google.com/url?q=https://gist.github.com/arfon/478b2ed49e11f984d6fb&sa=D&ust=1463818045225000&usg=AFQjCNH0lfNgJbsH25C6wIq2rMC0VVfwWw
+
+### Software Discovery Dashboard work (MSL + RIT)
+
+ * [Etherpad](https://public.etherpad-mozilla.org/p/codemeta-sdd)
+ * To test out earlier versions of the CodeMeta schema and crosswalk table, the [Mozilla Science Lab](http://mozillascience.org/) partnered with the [Rochester Institute of Technology](http://www.rit.edu/) to build the [Software Discovery Dashboard](http://rocky-falls-16959.herokuapp.com/). This open source prototype searches for research software across multiple code hosting services ([Zenodo](https://zenodo.org/), [figshare](https://figshare.com/), [GitHub](http://github.com/)) to demonstrate benefits of interoperability between software archives. This gives researchers more precise and accurate searches by: a) querying various repositories commonly used to store research software and b) enabling advanced filtering on fields present in the CodeMeta schema. While this prototype demonstrates how a method for mapping between code repositories can be beneficial to the research community, further adoption of CodeMeta would enable more insights in the research software landscape.
+ * Using the CodeMeta schema with limited adoption makes the Software Discovery Dashboard less granular for searching and analysis than it could be. As the CodeMeta schema finalizes, digital research repositories would ideally adopt it for better interoperability and communication with other repositories and services. With broader adoption of CodeMeta, the Software Discovery Dashboard will be able to track statistics like citations, downloads, code publication and used programming languages. This not only helps users discover new research trends but also gives an idea of what classifies scientific software. When the CodeMeta standard gains traction with digital repositories, the Software Discovery Dashboard's promotion of a minimal cross-platform schema will hopefully generate interest in both the research community and the software community, motivating other sites to adopt it.
+ * To build the Software Discovery Dashboard, the group implemented mapping code that converts metadata from other code repositories into the standard CodeMeta schema. While this needs to be updated as CodeMeta finalizes, this code can be reused and modularized broader use in the community. The current implementation can be found on GitHub (https://github.com/mozillascience/software-discovery-dashboard) under an MIT license.
+
+
+### Project CReDiT
+
+
+### Data Repository (domain, institutional) - DataCite integration
+
+
+### CRAN, PyPI?
