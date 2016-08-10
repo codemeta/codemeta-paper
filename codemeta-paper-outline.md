@@ -42,7 +42,7 @@ Examples of usage[c]
    * Current implementation
 * Software Discovery Dashboard work (MSL + RIT) (Peter, Luke, Abby)
    * Etherpad: https://public.etherpad-mozilla.org/p/codemeta-sdd
-* Project CReDiT
+* Project CRediT (Dan & ?)
 * Data Repository (domain, institutional) - DataCite integration (Matt, Mercè)
 * CRAN, PyPI?
 
