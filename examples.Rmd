@@ -54,8 +54,13 @@ https://www.google.com/url?q=https://gist.github.com/arfon/478b2ed49e11f984d6fb&
  * To build the Software Discovery Dashboard, the group implemented mapping code that converts metadata from other code repositories into the standard CodeMeta schema. While this needs to be updated as CodeMeta finalizes, this code can be reused and modularized broader use in the community. The current implementation can be found on GitHub (https://github.com/mozillascience/software-discovery-dashboard) under an MIT license.
 
 
-### Project CReDiT
+### Project CRediT (DSK)
 
+[Project CRediT (Contributor Role Taxonomy)](http://casrai.org/credit) [(cite)](http://www.nature.com/news/publishing-credit-where-credit-is-due-1.15033) focuses on understanding and recording the roles of various contributors to a product, using a taxonomy developed initially by data mining free-form text of author contribution statements and then further refined through human and publisher testing and feedback via work with Consortia Advancing Standards in Research Administration (CASRAI) and National Information Standards Organization (NISO).
+While the intent of Project CRediT is to record the roles of all contributors to all types of projects, the [taxonomy](http://dictionary.casrai.org/Contributor_Roles) has some implicit bias towards the product being a paper, such as the fact that most software contributions ("programming, software development; designing computer programs; implementation of the computer code and supporting algorithms; testing of existing code components") are grouped into a single _software_ role.
+Other roles such _conceptualization_; _funding acquisition_; _investigation_; _methodology_; _project administration_; _resources_; _supervision_; and _validation_  may also make sense for a software product. 
+Similarly, roles such as _writing – original draft_ and _writing – review & editing_ seem to overlap the _software_ role when the product is software.
+And some roles important to software project do not exist, such as documentation, training, evangalism, community development, etc.
 
 ### Data Repository (domain, institutional) - DataCite integration
 
