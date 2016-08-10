@@ -48,11 +48,18 @@ https://www.google.com/url?q=https://gist.github.com/arfon/478b2ed49e11f984d6fb&
 
 ### Software Discovery Dashboard work (Mozilla Science Lab + Rochester Institute of Technology)
 
+Read more details in the [Etherpad](https://public.etherpad-mozilla.org/p/codemeta-sdd)
  
+**Using CodeMeta**
+
 To test out earlier versions of the CodeMeta schema and crosswalk table, the [Mozilla Science Lab](http://mozillascience.org/) partnered with the [Rochester Institute of Technology](http://www.rit.edu/) to build the [Software Discovery Dashboard](http://rocky-falls-16959.herokuapp.com/). This open source prototype searches for research software across multiple code hosting services ([Zenodo](https://zenodo.org/), [figshare](https://figshare.com/), [GitHub](http://github.com/)) to demonstrate benefits of interoperability between software archives. This gives researchers more precise and accurate searches by: a) querying various repositories commonly used to store research software and b) enabling advanced filtering on fields present in the CodeMeta schema. While this prototype demonstrates how a method for mapping between code repositories can be beneficial to the research community, further adoption of CodeMeta would enable more insights in the research software landscape.
+
+**Lessons Learned**
  
 Using the CodeMeta schema with limited adoption makes the Software Discovery Dashboard less granular for searching and analysis than it could be. As the CodeMeta schema finalizes, digital research repositories would ideally adopt it for better interoperability and communication with other repositories and services. With broader adoption of CodeMeta, the Software Discovery Dashboard will be able to track statistics like citations, downloads, code publication and used programming languages. This not only helps users discover new research trends but also gives an idea of what classifies scientific software. When the CodeMeta standard gains traction with digital repositories, the Software Discovery Dashboard's promotion of a minimal cross-platform schema will hopefully generate interest in both the research community and the software community, motivating other sites to adopt it.
  
+**Mapping Code**
+
 To build the Software Discovery Dashboard, the group implemented mapping code that converts metadata from other code repositories into the standard CodeMeta schema. While this needs to be updated as CodeMeta finalizes, this code can be reused and modularized broader use in the community. The current implementation can be found on GitHub (https://github.com/mozillascience/software-discovery-dashboard) under an MIT license.
 
 
