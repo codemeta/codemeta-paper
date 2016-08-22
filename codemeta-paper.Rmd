@@ -10,7 +10,7 @@ author:
 - Patricia Cruse (DataCite)
 - Carole Goble (University of Manchester)
 - Matthew B. Jones (UCSB/NCEAS)
-- Daniel S. Katz (NCSA)
+- Daniel S. Katz (University of Illinois Urbana-Champaign)
 - Kyle E. Niemeyer (Oregon State University)
 - Krzysztof Nowak (Zenodo)
 - Ashley Sands (UCLA)
