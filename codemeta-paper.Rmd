@@ -25,23 +25,156 @@ bibliography: references.bib
 fontsize: 11
 ---
 
-```{r child = 'introduction.Rmd'}
-```
+Introduction
+------------
 
-```{r child = 'methodology.Rmd'}
-```
+<!-- Lot of focus on archiving, no discussion of software metadata issues -->
 
-```{r child = 'use-cases.Rmd'}
-```
+Software developed by scientific researchers plays an already ubiquitous and
+ever increasing role in academic research, both as a supporting element of
+research recorded as papers, as well as a primary research output.
+This leads to increasing recognition of the need for better mechanisms to
+_archive_, _index_, _share_, _discover_ and _attribute_ research software.
+These needs impact users, creators, repositories, and funders of this software.
+Researchers relying on software need better mechanisms to discover and cite
+software they use. Researchers creating software need a robust way to archive
+software and track metrics of use. Funders supporting software creation are also
+interested in ways to identify preserve, track, and measure the use of software
+they have supported. [@Hannay2009] find that 91.2% of researchers state that
+using scientific software is important or very important for their own research
+and 84.3% say developing software is an important part of their own research.
+54% spend more time developing software now than in the decade prior, and 38%
+spend at least one fifth of their time developing software.
 
-```{r child = 'concepts.Rmd'}
-```
 
-```{r child = 'examples.Rmd'}
-```
+Despite this, infrastructure to support the preservation, discovery, reuse, 
+and attribution of software lags substantially behind that of other research 
+products such as journal articles and research data. This lag is driven not 
+so much by a lack of technology as it is by a lack of unity: existing 
+mechanisms to archive, document, index, share, discover, and cite software 
+contributions are heterogeneous among both disciplines and archives and rarely
+meet best practices [@Howison2015]. Their study finds that only 31--43% of the
+mentions of software in papers include a formal citation, and reveals
+problems with access to the software that citations are supposed to facilitate,
+with between 15--29% of software mentioned being inaccessible in any form. 
+Software may be inaccessible because the citation does not provide enough
+information to identify it, because the software is no longer available at the
+URL provided (preservation failure), or because the software has never been
+made publicly available.
 
-```{r child = 'next-steps.Rmd'}
-```
+Fortunately, a rapidly growing movement to
+improve preservation, discovery, reuse and attribution of academic software is
+now underway: a recent NIH report, conferences and working groups of Force11,
+WSSSPE & Software Sustainability Institute, and the rising adoption of 
+repositories like GitHub, Zenodo, figshare & DataONE by academic software 
+developers. 
+
+
+
+
+<!--
+In many research fields, code and development practices are of widely varying quality, due to lack of recognized best practices and lack of rewards and incentives.  Standardizing repositories and practices around the FAIR concepts will contribute to solving this problem.
+-->
+
+
+### What do we mean by research software? 
+
+ Research software covers a wide range of code products: from a piece of code that contains a function to a multi function tool
+
+ * Research software can be distinguished from other software in that is is similar to other research product such as papers or books. The specific decision of what is research software is up to each person to decide. However, an illustrative example is the use of Microsoft Excel in research. We suggest that if Excel is used to simply store and plot data, it is not research software, but if it is used for statistical analysis, it may be. Similarly, general software for conducting library research (e.g., JSTOR Mobile App), writing research papers (e.g., LaTeX), research presentations (e.g., Powerpoint) or communications (e.g., Skype) are not research software. On the other hand, if the specific software is important to the research outcome,  for example if different software could produce different data or results, then the software is research software.
+
+Generally recognized that it should be in the landscape:
+
+ * Link to SCWG principles [@SCWG; @SoftwareCitation2016]
+ * Link to other calls for software as first class object (NSF “Products” vs Pubs)
+ * Reports that call for software discovery and preservation (NIH Software Discovery Index)
+
+### How does this differ from data?
+
+Why software is different than other research outputs, such as data and papers:
+
+ * Conceptual differences: granularity/referencing, versioning, evolving contributor set
+ * Software can be considered a type of data, but the converse is not generally true. Software is different than data and papers in that:
+
+   * Software can be used to express or explain concepts, unlike data
+   * Software is updated more frequently that papers or data.
+   * Software is executable, unlike papers or data
+   * Software suffers from a different type of bit rot than data — software must be constantly maintained so that it continues to function as both the hardware and software environments that it is used on changes, as bugs are found and fixed, and as user requirements demand new features and capabilities.
+   * Software is frequently built to use other software, leading to complex dependencies, and these dependent software packages also are frequently changing.
+   * Software is generally smaller than data, so a number of the storage and preservation constraints on data don’t apply to software.
+   * Software teams can be very large, and very multidisciplinary, and there can be many varied roles that are overlapping and sometimes ambiguous with respect to contributions, and which contributions rise to a level equivalent to paper authorship.
+   * The lifetime of software is generally not as long as that of data.
+   * (cite https://danielskatzblog.wordpress.com/2016/04/13/data-and-software-management-plans-must-be-public-and-should-be-machine-readable/)
+
+### Heterogeneity in software metadata
+
+In contrast to the established practices of journal publication or the more nascent practices for data publication, the mechanisms to archive, index, share, discover, and attribute research software remain highly heterogeneous. Like journals and data repositories, indexes or repositories for software can be specific to domains (e.g. Astrophysics Source Code Library, ASCL), funder (DARPA Open Catalog) or conversely rely on platforms also used for commercial software (GitHub, as used by code.nasa.gov).  Yet while journals and data repositories adopt consistent metadata that is aggregated and indexed (e.g. by CrossRef and DataCite, as well as publishers like Thomson Reuters that compute impact factors from citation information), no such infrastructure exists for software.  Indexes like the ASCL or DARPA Open Catalog do not necessarily archive the software itself, making citations vulnerable to the inaccessibility found by @Howison2015. These indexes may not always specify the particular version of the software, or, lacking an automated way to track updates to software that is maintained at an external location, may not reflect the most recent versions.  Software repositories frequently omit other information necessary for reuse of the software, such as a description of the software dependencies, computational environments, or testing and quality information to ensure that the software is suitable for particular uses.
+
+These differences and gaps in schema arise because different metadata are required for different purposes. Thus this heterogeneity is not simply a technical issue, but a cultural one which requires an understanding of each of the use cases that motivate the various metadata schema.
+
+CodeMeta is intended to provide software metadata for making software Findable, Accessible, Interoperable, and Reusable (FAIR). CodeMeta is not intended to be yet another standard, but rather a crosswalk that allows interoperability among existing practitioners and repositories that want to exchange software metadata.
+
+## Codemeta Project Products
+
+### Methodology
+
+CodeMeta seeks to address these problems by bringing together a collaboration of stakeholders in the software archive pipeline to harmonize their disparate approaches to software metadata. The participating stakeholders include representatives from dedicated software archives (e.g., ASCL), general purpose repositories (e.g., Zenodo, GitHub, figshare), domain and institutional data repositories (e.g., DataONE, DataVerse), open science communities (e.g., Software Sustainability Institute, Mozilla Science Lab), tool developers, and domain researchers.
+
+The guiding principles of the CodeMeta activity are that it should be driven by real world use cases, lead to results that are as simple as possible, and be conscious of how it will impact existing practices and repositories.
+
+CodeMeta’s overarching goal is to produce a crosswalk among software metadata approaches that enables software metadata creators and repositories to communicate effectively about software using a consensus vocabulary, accompanied by a machine-readable representation and reference implementation of tools for manipulating this software metadata.  In this paper, we describe the results of that interoperability activity, specifically the work done by about 15 attendees in a two-day workshop in April 2016 in Portland, Oregon, co-located with the FORCE2016 conference.  Participant invitations reflected both individual expertise and a diversity of experiences and perspectives, along with representation from many of the leading organizations in researh software metadata and archiving. The Cosswalk consensus was an equal group effort by the participants, who all contributed to the workshop and to the writing. The crosswalk has further benefited from significant feedback and contributions from the broader research software community.  Smaller teams have then helped create the corresponding JSON-LD context file describing the consensus terms and several reference implementations of tools for working with this metadata.
+
+
+### Crosswalk
+
+The crosswalk represents a consensus mapping between many commonly used software metadata formats found in scientific repositories (Zenodo, figshare, DataONE, ACL), langauge-specific packaging mechanisms for software (R's packages, Java's Maven, Python's distutils, Ruby's gemspec, Debian packages, Javascript's NodeJS) and existing ontologies (Dublin Core, Wikidata, DOAP, Software Ontology, Schema.org) among others. The full crosswalk table is available as a plain text file in comma-separated value (csv) format, with columns indicating metadata standards and rows indicating the various properties that appear in one or more of these standards.  A more human-readable visualization of the crosswalk can be seen at: <https://codemeta.github.io/crosswalk/>.  
+
+While the appropriate crosswalk between the properties of most standards was unabiguous, occassional issues arise which require potentially subjective decisions which would require the consensus of the workshop participants.  The first and most important was determining what set of concepts would be retained and what concepts would be considered out of scope.  Using any property that appeared in at least one of the standards in the crosswalk would be one resolution to this, but would result in too many terms of limited use. Workshop participants first identified a set of 12 types of use cases that could be addressed by CodeMeta, and then associated properties found in any of the standards considered to one or more of these use cases.  Properties associated with no use case were then excluded.  Meanwhile, a small handful of properties found in none of the existing standards but considered essential for one or more use cases was introduced to the crosswalk table.  The resulting table consisted of 68 unique properties relevant to software metadata. A description of all of these terms can be found at <https://codemeta.github.io/terms/>.
+
+
+### JSON-LD Context
+
+Programmatic use of the crosswalk and software metadata requires a machine-readable representation.  After considering a range of possible technologies, the CodeMeta workshop participants settled on the choice of JSON-LD representation as striking the optimal balance between simplicity, usability, and avialable features.  JSON-LD is well recognized and widely used, and is now the perferred format of major search engines such as Google for serializing linked data on the Web.  Most importantly, JSON-LD is particularly suited to the project's aims of being able to crosswalk between different vocabularies, or "contexts" used to represent the same properties.  
+
+<!-- Obviously this glosses over the distinctions in version 1, in which a larger number of new terms was introduced despite some of them already existing in schema.org representation.   Not sure if it is useful or needlessly pedantic to detail the implementations of version 1 and version 2 separately.  -->
+
+While no standard includes all of these properties, 58 of the concepts could be described under the terms defined by <http://schema.org/SoftwareSourceCode>  or <http://schema.orgSoftwareApplication> types in Schema.org.  
+
+
+### Website
+
+The codemeta website provides an overview of the project, the visualizations of the crosswalk table, the list of 
+<!-- Should this be included as it's own section? --> 
+
+
+### Reference implementations of tooling
+
+The package `codemetar` [@codemetar] provides a reference implementation for generating `codemeta` files automatically for software packages written for the `R` language.  
+
+## Example Applications
+
+### Software Archiving
+
+Github -> Zenodo/DataONE -> DataCite
+
+### rOpenSci registry
+
+"Citation" statistics of authors.  
+Network graph: dependencies
+
+Topic search
+
+Packages without continuous integration.
+
+Transitive credit? 
+
+`codemetar` implementation, 
+
+### JSON-LD routines
+
+## Conclusions & Next Steps
+
+
 
 References
 ----------
